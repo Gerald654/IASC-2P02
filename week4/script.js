@@ -81,7 +81,7 @@ const planeFolder = ui.addFolder('Plane')
 planeFolder
     .add(planeMaterial, 'wireframe')
 
-// sphere ui
+// torus ui
 const torusFolder = ui.addFolder('Torus')
 
 torusFolder
@@ -93,7 +93,7 @@ torusFolder
 
 torusFolder
     .add(uiObject, 'play')
-    .name('Animate Sphere')
+    .name('Animate Torus')
 
 // Controls
 
@@ -108,7 +108,7 @@ const animation = () =>
     // Return elapsedTime
     const elapsedTime = clock.getElapsedTime()
 
-    // Animate sphere
+    // Animate Torus
     if(uiObject.play)
     {
         torus.position.y = Math.sin(elapsedTime * 0.5) * 2
