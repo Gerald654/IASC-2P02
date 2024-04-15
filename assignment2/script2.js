@@ -55,33 +55,43 @@ scene.add(directionalLight)
 ** MESHES **
 ************/
 // Sphere Geometry
-const sphereGeometry = new THREE.SphereGeometry(0.5)
+const torusGeometry = new THREE.TorusGeometry(0.5)
 
 // Sphere Materials
-const orangeMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('orange')
+const blueMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('blue')
 })
-const pinkMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('pink')
+const blueMaterial2 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('blue')
 })
-const aquaMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('aqua')
+const purpleMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('purple')
+})
+const purpleMaterial2 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('purple')
 })
 
-const drawSphere = (i, material) =>
+const blackMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('black')
+})
+const blackMaterial2 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('black')
+})
+
+const drawTorus = (i, material) =>
 {
-    const sphere = new THREE.Mesh(sphereGeometry, material)
-    sphere.position.x = (Math.random() - 0.5) * 10
-    sphere.position.z = (Math.random() - 0.5) * 10
-    sphere.position.y = i - 10
+    const torus = new THREE.Mesh(torusGeometry, material)
+    torus.position.y = (Math.random() - 0.5) * 10
+    torus.position.z = (Math.random() - 0.5) * 10
+    torus.position.x = i - 10
 
-    sphere.rotation.x = Math.random() * 2 * Math.PI
-    sphere.rotation.y = Math.random() * 2 * Math.PI
-    sphere.rotation.z = Math.random() * 2 * Math.PI
+    torus.rotation.x = Math.random() * 2 * Math.PI
+    torus.rotation.y = Math.random() * 2 * Math.PI
+    torus.rotation.z = Math.random() * 2 * Math.PI
 
-    sphere.randomizer = Math.random()
+    torus.randomizer = Math.random()
 
-    scene.add(sphere)
+    scene.add(torus)
 }
 
 
@@ -93,9 +103,12 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'dudley',
-    term2: 'snape',
-    term3: 'malfoy',
+    term1: 'encountered',
+    term2: 'carnival',
+    term3: 'jest',
+    term4: 'cough',
+    term5: 'masonry',
+    term6: 'satisfied',
     rotateCamera: false,
     animateBubbles: false
 }
@@ -113,13 +126,14 @@ const parseTextandTerms = () =>
     //console.log(uiobj.textArray)
 
     // Find term 1
-    findTermInParsedText(uiobj.term1, orangeMaterial)
-
+    findTermInParsedText(uiobj.term1, blueMaterial)
+    findTermInParsedText(uiobj.term2, blueMaterial2)
     // Find term 2
-    findTermInParsedText(uiobj.term2, pinkMaterial)
-
+    findTermInParsedText(uiobj.term3, purpleMaterial)
+    findTermInParsedText(uiobj.term4, purpleMaterial2)
     // Find term 3
-    findTermInParsedText(uiobj.term3, aquaMaterial)
+    findTermInParsedText(uiobj.term5, blackMaterial)
+    findTermInParsedText(uiobj.term6, blackMaterial2)
 
 }
 
@@ -137,7 +151,7 @@ const findTermInParsedText = (term, material) =>
          // call drawsphere function 5 times using converted n value
          for(let a=0; a < 5; a++)
          {
-            drawSphere(n, material)
+            drawTorus(n, material)
          }
 
         }
@@ -145,7 +159,7 @@ const findTermInParsedText = (term, material) =>
 }
 
 // Load source text
-fetch("https://raw.githubusercontent.com/amephraim/nlp/master/texts/J.%20K.%20Rowling%20-%20Harry%20Potter%201%20-%20Sorcerer's%20Stone.txt")
+fetch("https://raw.githubusercontent.com/Gerald654/IASC-2P02/main/assignment2/Assets/poe.txt")
     .then(response => response.text())
     .then((data) =>
     {
@@ -164,20 +178,29 @@ const ui = new dat.GUI({
     const spheresFolder = ui.addFolder('Filter Terms')
 
     spheresFolder
-        .add(orangeMaterial, 'visible')
+        .add(blueMaterial, 'visible')
         .name(`${uiobj.term1}`)
-
-    spheresFolder
-        .add(pinkMaterial, 'visible')
+        spheresFolder
+        .add(blueMaterial2, 'visible')
         .name(`${uiobj.term2}`)
 
     spheresFolder
-        .add(aquaMaterial, 'visible')
+        .add(purpleMaterial, 'visible')
         .name(`${uiobj.term3}`)
+        spheresFolder
+        .add(purpleMaterial2, 'visible')
+        .name(`${uiobj.term4}`)
+
+    spheresFolder
+        .add(blackMaterial, 'visible')
+        .name(`${uiobj.term5}`)
+        spheresFolder
+        .add(blackMaterial2, 'visible')
+        .name(`${uiobj.term6}`)
 
     spheresFolder
         .add(uiobj, 'animateBubbles')
-        .name('Animate Bubbles')
+        .name('Animate Torus')
 
     // Camera Folder
     const cameraFolder = ui.addFolder('Camera')

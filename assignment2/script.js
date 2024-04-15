@@ -54,33 +54,72 @@ scene.add(directionalLight)
 ** MESHES **
 ************/
 // Cube Geometry
-const cubeGeometry = new THREE.BoxGeometry(0.5, 0.5, 0.5)
+const sphereGeometry = new THREE.SphereGeometry(0.5)
 
 // Cube Materials
+const yellowMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('yellow')
+})
+const yellowMaterial2 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('yellow')
+})
+const yellowMaterial3 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('yellow')
+})
+const yellowMaterial4 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('yellow')
+})
+const yellowMaterial5 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('yellow')
+})
+
+const orangeMaterial = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('orange')
+})
+const orangeMaterial2 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('orange')
+})
+const orangeMaterial3 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('orange')
+})
+const orangeMaterial4 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('orange')
+})
+const orangeMaterial5 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('orange')
+})
+
 const redMaterial = new THREE.MeshStandardMaterial({
     color: new THREE.Color('red')
 })
-const greenMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('green')
+const redMaterial2 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('red')
 })
-const blueMaterial = new THREE.MeshStandardMaterial({
-    color: new THREE.Color('blue')
+const redMaterial3 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('red')
+})
+const redMaterial4 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('red')
+})
+const redMaterial5 = new THREE.MeshStandardMaterial({
+    color: new THREE.Color('red')
 })
 
-const drawCube = (i, material) =>
+const drawSphere = (i, material) =>
 {
-    const cube = new THREE.Mesh(cubeGeometry, material)
-    cube.position.x = i - 10
-    cube.position.y = (Math.random() - 0.5) * 10
-    cube.position.z = (Math.random() - 0.5) * 10
+    const sphere = new THREE.Mesh(sphereGeometry, material)
+    sphere.position.y = i - 10
+    sphere.position.x = (Math.random() - 0.5) * 10
+    sphere.position.z = (Math.random() - 0.5) * 10
     
 
-    cube.rotation.x = Math.random() * 2 * Math.PI
-    cube.rotation.y = Math.random() * 2 * Math.PI
-    cube.rotation.z = Math.random() * 2 * Math.PI
+    sphere.rotation.x = Math.random() * 2 * Math.PI
+    sphere.rotation.y = Math.random() * 2 * Math.PI
+    sphere.rotation.z = Math.random() * 2 * Math.PI
 
-    scene.add(cube)
+    scene.add(sphere)
 }
+
 
 
 /**********************
@@ -91,9 +130,21 @@ let preset = {}
 const uiobj = {
     text: '',
     textArray: [],
-    term1: 'fortunato',
-    term2: 'hat',
-    term3: 'broom',
+    term1: 'vowed',
+    term2: 'nature',
+    term3: 'idea',
+    term4: 'thought',
+    term5: 'revenge',
+    term6: 'encountered',
+    term7: 'carnival',
+    term8: 'vaults',
+    term9: 'nitre',
+    term10: 'cough',
+    term11: 'hesitated',
+    term12: 'drink',
+    term13: 'wine',
+    term14: 'tier',
+    term15: 'masonry',
     rotateCamera: false
 }
 
@@ -110,13 +161,25 @@ const parseTextandTerms = () =>
     //console.log(uiobj.textArray)
 
     // Find term 1
-    findTermInParsedText(uiobj.term1, redMaterial)
+    findTermInParsedText(uiobj.term1, yellowMaterial)
 
     // Find term 2
-    findTermInParsedText(uiobj.term2, greenMaterial)
+    findTermInParsedText(uiobj.term2, yellowMaterial2)
 
     // Find term 3
-    findTermInParsedText(uiobj.term3, blueMaterial)
+    findTermInParsedText(uiobj.term3, yellowMaterial3)
+    findTermInParsedText(uiobj.term4, yellowMaterial4)
+    findTermInParsedText(uiobj.term5, yellowMaterial5)
+    findTermInParsedText(uiobj.term6, orangeMaterial)
+    findTermInParsedText(uiobj.term7, orangeMaterial2)
+    findTermInParsedText(uiobj.term8, orangeMaterial3)
+    findTermInParsedText(uiobj.term9, orangeMaterial4)
+    findTermInParsedText(uiobj.term10, orangeMaterial5)
+    findTermInParsedText(uiobj.term11, redMaterial)
+    findTermInParsedText(uiobj.term12, redMaterial2)
+    findTermInParsedText(uiobj.term13, redMaterial3)
+    findTermInParsedText(uiobj.term14, redMaterial4)
+    findTermInParsedText(uiobj.term15, redMaterial5)
 
 }
 
@@ -134,7 +197,7 @@ const findTermInParsedText = (term, material) =>
          // call drawCube function 5 times using converted n value
          for(let a=0; a < 5; a++)
          {
-            drawCube(n, material)
+            drawSphere(n, material)
          }
 
         }
@@ -142,7 +205,7 @@ const findTermInParsedText = (term, material) =>
 }
 
 // Load source text
-fetch("https://www.gutenberg.org/cache/epub/1063/pg1063.txt")
+fetch("https://raw.githubusercontent.com/Gerald654/IASC-2P02/main/assignment2/Assets/poe.txt")
     .then(response => response.text())
     .then((data) =>
     {
@@ -161,16 +224,52 @@ const ui = new dat.GUI({
     const cubesFolder = ui.addFolder('Filter Terms')
 
     cubesFolder
-        .add(redMaterial, 'visible')
+        .add(yellowMaterial, 'visible')
         .name(`${uiobj.term1}`)
-
     cubesFolder
-        .add(greenMaterial, 'visible')
+        .add(yellowMaterial2, 'visible')
         .name(`${uiobj.term2}`)
+    cubesFolder
+        .add(yellowMaterial3, 'visible')
+        .name(`${uiobj.term3}`)
+    cubesFolder
+        .add(yellowMaterial4, 'visible')
+        .name(`${uiobj.term4}`)
+    cubesFolder
+        .add(yellowMaterial5, 'visible')
+        .name(`${uiobj.term5}`)
 
     cubesFolder
-        .add(blueMaterial, 'visible')
-        .name(`${uiobj.term3}`)
+        .add(orangeMaterial, 'visible')
+        .name(`${uiobj.term6}`)
+    cubesFolder
+        .add(orangeMaterial2, 'visible')
+        .name(`${uiobj.term7}`)
+    cubesFolder
+        .add(orangeMaterial3, 'visible')
+        .name(`${uiobj.term8}`)
+    cubesFolder
+        .add(orangeMaterial4, 'visible')
+        .name(`${uiobj.term9}`)
+    cubesFolder
+        .add(orangeMaterial5, 'visible')
+        .name(`${uiobj.term10}`)
+
+    cubesFolder
+        .add(redMaterial, 'visible')
+        .name(`${uiobj.term11}`)
+    cubesFolder
+        .add(redMaterial2, 'visible')
+        .name(`${uiobj.term12}`)
+    cubesFolder
+        .add(redMaterial3, 'visible')
+        .name(`${uiobj.term13}`)
+    cubesFolder
+        .add(redMaterial4, 'visible')
+        .name(`${uiobj.term14}`)
+    cubesFolder
+        .add(redMaterial5, 'visible')
+        .name(`${uiobj.term15}`)
 
     // Camera Folder
     const cameraFolder = ui.addFolder('Camera')
